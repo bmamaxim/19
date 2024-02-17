@@ -14,6 +14,10 @@ class MyServer(BaseHTTPRequestHandler):
 
     @staticmethod
     def get_open():
+        """
+        Функция чтения html файла
+        :return: html
+        """
         with open('index.html', 'r', encoding='utf-8')as file:
             return file.read()
 
