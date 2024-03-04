@@ -8,7 +8,7 @@ NULLABLE = {'blank': True, 'null': True}
 
 class Categories(models.Model):
     category_name = models.CharField(max_length=200, verbose_name='категория')
-    category_description = models.CharField(max_length=200, verbose_name='описание')
+    category_description = models.CharField(max_length=200, verbose_name='описание', **NULLABLE)
 
     def __str__(self):
         return f'{self.category_name} {self.category_description}'

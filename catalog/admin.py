@@ -8,6 +8,8 @@ from catalog.models import Categories, Products
 @admin.register(Categories)
 class CategoriesAdmin(admin.ModelAdmin):
     list_display = ('id', 'category_name',)
+    list_filter = ('category_name',)
+    search_fields = ('category_name',)
 
 @admin.register(Products)
 class ProductsAdmin(admin.ModelAdmin):
