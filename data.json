@@ -1,0 +1,70 @@
+[
+  {
+    "model": "catalog.categories",
+    "pk": 1,
+    "fields": {
+      "category_name": "phone",
+      "category_description": "smartphone"
+    }
+  },
+  {
+    "model": "catalog.categories",
+    "pk": 2,
+    "fields": {
+      "category_name": "monitor",
+      "category_description": null
+    }
+  },
+  {
+    "model": "catalog.products",
+    "pk": 1,
+    "fields": {
+      "product_name": "galaxy s23",
+      "product_description": "samsung",
+      "product_image": "",
+      "product_category": 1,
+      "product_price": 0,
+      "created_at": "2024-03-04",
+      "updated_at": "2024-03-04"
+    }
+  },
+  {
+    "model": "catalog.products",
+    "pk": 2,
+    "fields": {
+      "product_name": "galaxi s24",
+      "product_description": "samsung",
+      "product_image": "",
+      "product_category": 1,
+      "product_price": null,
+      "created_at": "2024-03-04",
+      "updated_at": "2024-03-04"
+    }
+  },
+  {
+    "model": "catalog.products",
+    "pk": 3,
+    "fields": {
+      "product_name": "dell",
+      "product_description": "led",
+      "product_image": "",
+      "product_category": 2,
+      "product_price": null,
+      "created_at": "2024-03-04",
+      "updated_at": "2024-03-04"
+    }
+  },
+  {
+    "model": "catalog.products",
+    "pk": 4,
+    "fields": {
+      "product_name": "samsung",
+      "product_description": "oled",
+      "product_image": "",
+      "product_category": 2,
+      "product_price": null,
+      "created_at": "2024-03-04",
+      "updated_at": "2024-03-04"
+    }
+  }
+]
