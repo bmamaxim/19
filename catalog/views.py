@@ -1,9 +1,16 @@
 from django.shortcuts import render
 
+from catalog.models import Categories
+
+
 # Create your views here.
 
 def home(request):
-    return render(request, 'catalog/home.html')
+    category = Categories.objects.all()
+    context = {
+        'object_list': category
+    }
+    return render(request, 'catalog/home.html', context)
 
 def contacts(request):
     if request.method == 'POST':
