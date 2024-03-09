@@ -1,6 +1,6 @@
 from django.shortcuts import render
 
-from catalog.models import Categories
+from catalog.models import Categories, Products
 
 
 # Create your views here.
@@ -19,3 +19,16 @@ def contacts(request):
         message = request.POST.get('message')
         print(f'You have new message from {name}({email}): {message}')
     return render(request, 'catalog/contacts.html')
+
+def products(request):
+    product = Products.objects.all
+    context = {
+        'object_list': product
+    }
+    return render(request, 'catalog/products.html', context=context)
+
+def product(request, pk):
+    context = {
+        'object_list': Products.objects.get(pk=pk)
+    }
+    return render(request, 'catalog/product.html', context=context)
