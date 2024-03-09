@@ -3,11 +3,11 @@ from django.urls import path
 from catalog.apps import CatalogConfig
 from catalog.views import home, contacts, products, product
 
-app_name = CatalogConfig.name
+app_name = 'products'
 
 urlpatterns = [
     path('', home),
     path('contacts/', contacts, name='contacts'),
     path('products/', products, name='products'),
-    path('product/<int:pk>', product, name='product'),
+    path('<int:pk>', product, name='product'),
 ]
