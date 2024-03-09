@@ -5,12 +5,12 @@
 <div class="row">
     {% for object in object_list %}
     <div class="col-3">
-        <img class="card-img-top" src="{{ Products.product_image | media_filter }}">
-        <a href="{% url 'products:product' object.pk %}" class="btn mt-2 btn-lg btn-block  btn-outline-primary"
-            style="--bs-btn-padding-y: 3.0rem; --bs-btn-padding-x: 5.0rem; --bs-btn-font-size: 1.0rem;">
-        <h1 class="card-title pricing-card-title">{{ object.product_name }}</h1>
-            <ul class="list-unstyled mt-3 mb-4 text-start m-3">
 
+        <a href="{% url 'products:product' object.pk %}" class="btn mt-2 btn-lg btn-block  btn-outline-primary"
+           style="--bs-btn-padding-y: 3.0rem; --bs-btn-padding-x: 5.0rem; --bs-btn-font-size: 1.0rem;">
+            <h1 class="card-title pricing-card-title">{{ object.product_name }}</h1>
+            <ul class="list-unstyled mt-3 mb-4 text-start m-3">
+                <img class="card-img-top" src="{{ object_list.product_image | media_filter }}">
                 <li>- {{ object.product_category.category_name}}</li>
             </ul>
         </a>
