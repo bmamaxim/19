@@ -3,17 +3,16 @@
 <div class="row">
     {% for object in object_list %}
     <div class="col-3">
-        <button type="button" class="btn mt-2 btn-lg btn-block  btn-outline-primary"
-                href="{% url 'products:product' object.pk %}"
-                style="--bs-btn-padding-y: 3.0rem; --bs-btn-padding-x: 5.0rem; --bs-btn-font-size: 1.0rem;">
-            <h1 class="card-title pricing-card-title">{{ object.product_name }}</h1>
+        <a href="{% url 'products:product' object.pk %}" class="btn mt-2 btn-lg btn-block  btn-outline-primary"
+        style="--bs-btn-padding-y: 3.0rem; --bs-btn-padding-x: 5.0rem; --bs-btn-font-size: 1.0rem;"
+        <h1 class="card-title pricing-card-title">{{ object.product_name }}</h1>
             <ul class="list-unstyled mt-3 mb-4 text-start m-3">
                 <li>- {{ object.product_price }}</li>
                 <li>- {{ object.product_category.category_name}}</li>
                 <li>-</li>
                 <li>-</li>
             </ul>
-        </button>
+        </a>
     </div>
     {% endfor %}
 </div>
