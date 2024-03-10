@@ -8,7 +8,8 @@ from catalog.models import Categories, Products
 def home(request):
     category = Categories.objects.all()
     context = {
-        'object_list': category
+        'object_list': category,
+        'title': 'Главная'
     }
     return render(request, 'catalog/home.html', context)
 
@@ -18,12 +19,17 @@ def contacts(request):
         email = request.POST.get('email')
         message = request.POST.get('message')
         print(f'You have new message from {name}({email}): {message}')
-    return render(request, 'catalog/contacts.html')
+
+    context = {
+        'title': 'Обратная связь'
+    }
+    return render(request, 'catalog/contacts.html', context=context)
 
 def products(request):
     product = Products.objects.all
     context = {
-        'object_list': product
+        'object_list': product,
+        'title': 'Товары'
     }
     return render(request, 'catalog/products.html', context=context)
 
