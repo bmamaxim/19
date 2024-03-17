@@ -1,11 +1,32 @@
 from django.shortcuts import render
+from django.views.generic import ListView, DetailView, CreateView
 
 from catalog.models import Categories, Products
 
 
-# Create your views here.
+class ProductsListView(ListView):
+    """
+    Класс контроллер приложения каталог
+    шаблон продукты
+    """
+    model = Products
+    template_name = 'catalog/products.html'
+
+class ProductDetailView(DetailView):
+    """
+    Класс контроллер приложения каталог
+    шаблон продукта
+    """
+    model = Products
+    template_name = 'catalog/product.html'
 
 def home(request):
+    """
+    Функция контроллер шаблона
+    домашней страницы приложения каталог
+    :param request: data
+    :return: dict
+    """
     category = Categories.objects.all()
     context = {
         'object_list': category,
@@ -14,6 +35,12 @@ def home(request):
     return render(request, 'catalog/home.html', context)
 
 def contacts(request):
+    """
+    Функция контроллер шаблона
+    страницы контакты приложения каталог
+    :param request: data
+    :return: dict
+    """
     if request.method == 'POST':
         name = request.POST.get('name')
         email = request.POST.get('email')
@@ -25,16 +52,3 @@ def contacts(request):
     }
     return render(request, 'catalog/contacts.html', context=context)
 
-def products(request):
-    product = Products.objects.all
-    context = {
-        'object_list': product,
-        'title': 'Товары'
-    }
-    return render(request, 'catalog/products.html', context=context)
-
-def product(request, pk):
-    context = {
-        'object_list': Products.objects.get(pk=pk)
-    }
-    return render(request, 'catalog/product.html', context=context)
