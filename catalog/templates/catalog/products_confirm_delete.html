@@ -14,10 +14,10 @@
                         <form method="post">
                             {% csrf_token %}
                             <button type="submit" class="btn btn-lg btn-outline-danger">
-                                Удалить {{object.title }} ?
+                                Удалить {{object.product_name }} ?
                             </button>
                             <a type="submit" class="btn btn-lg btn-outline-primary"
-                               href="{% url 'blogpost:list' %}">Отмена
+                               href="{% url 'products:list' %}">Отмена
                             </a>
                         </form>
                     </div>

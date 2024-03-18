@@ -1,7 +1,18 @@
 from django.shortcuts import render
-from django.views.generic import ListView, DetailView, CreateView
+from django.urls import reverse_lazy, reverse
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 
 from catalog.models import Categories, Products
+
+
+class ProductsCreateView(CreateView):
+    """
+    класс контроллер приложения каталог
+    шаблон форма добавить продукт
+    """
+    model = Products
+    fields = ('product_name', 'product_description', 'product_image', 'product_category', 'product_price')
+    success_url = reverse_lazy('catalog:list')
 
 
 class ProductsListView(ListView):
@@ -10,15 +21,38 @@ class ProductsListView(ListView):
     шаблон продукты
     """
     model = Products
-    template_name = 'catalog/products.html'
+    template_name = 'catalog/products_list.html'
 
-class ProductDetailView(DetailView):
+
+class ProductsDetailView(DetailView):
     """
     Класс контроллер приложения каталог
     шаблон продукта
     """
     model = Products
-    template_name = 'catalog/product.html'
+    template_name = 'catalog/products_detail.html'
+
+class ProductsUpdateView(UpdateView):
+    """
+    класс контроллер приложения каталог
+    шаблон форма изменить продукт
+    """
+    model = Products
+    fields = ('product_name', 'product_description', 'product_image', 'product_category', 'product_price')
+    success_url = reverse_lazy('catalog:list')
+
+    def get_success_url(self):
+        return reverse('products:detail', args=[self.kwargs.get('pk')])
+
+
+class ProductsDeleteView(DeleteView):
+    """
+    класс контроллер приложения каталог
+    шаблон форма удалить продукт
+    """
+    model = Products
+    success_url = reverse_lazy('catalog:list')
+
 
 def home(request):
     """

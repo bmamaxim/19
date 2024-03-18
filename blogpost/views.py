@@ -16,6 +16,7 @@ class BlogPostCreateView(CreateView):
             new_dealer = form.save()
             new_dealer.slag = slugify(new_dealer.title)
             new_dealer.save()
+
         return super().form_valid(form)
 
 
@@ -48,6 +49,7 @@ class BlogPostUpdateView(UpdateView):
             new_dealer = form.save()
             new_dealer.slag = slugify(new_dealer.title)
             new_dealer.save()
+
         return super().form_valid(form)
 
     def get_success_url(self):
