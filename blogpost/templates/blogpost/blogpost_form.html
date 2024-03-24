@@ -9,7 +9,13 @@
             <div class="col-lg-6 col-md-6 col-sm-12">
                 <div class="card mb-4 box-shadow">
                     <div class="card-header">
-                        <h4 class="my-0 font-weight-normal">Зарегистрируйтесь</h4>
+                        <h4 class="my-0 font-weight-normal">
+                            {% if object %}
+                            Изменить
+                            {% else %}
+                            Зарегистрируйтесь
+                            {% endif %}
+                        </h4>
                     </div>
                     <div class="card-body">
                         <form method="post" enctype="multipart/form-data" class="form-floating">
@@ -17,9 +23,9 @@
                             {{ form.as_p }}
                             <button type="submit" class="btn btn-lg btn-block btn-outline-primary">
                                 {% if object %}
-                                    Отправить
+                                Отправить
                                 {% else %}
-                                    Создать
+                                Создать
                                 {% endif %}
                             </button>
                         </form>

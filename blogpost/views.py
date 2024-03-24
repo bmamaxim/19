@@ -13,9 +13,9 @@ class BlogPostCreateView(CreateView):
 
     def form_valid(self, form):
         if form.is_valid():
-            new_dealer = form.save()
-            new_dealer.slag = slugify(new_dealer.title)
-            new_dealer.save()
+            new_mat = form.save()
+            new_mat.slag = slugify(new_mat.title)
+            new_mat.save()
 
         return super().form_valid(form)
 
@@ -46,9 +46,9 @@ class BlogPostUpdateView(UpdateView):
 
     def form_valid(self, form):
         if form.is_valid():
-            new_dealer = form.save()
-            new_dealer.slag = slugify(new_dealer.title)
-            new_dealer.save()
+            new_mat = form.save()
+            new_mat.slag = slugify(new_mat.title)
+            new_mat.save()
 
         return super().form_valid(form)
 
