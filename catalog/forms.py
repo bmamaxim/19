@@ -1,9 +1,12 @@
 from django import forms
 
-from catalog.models import Products
+from catalog.models import Products, Version
 
 
 class ProductsForm(forms.ModelForm):
+    """
+    Форма класса продукта
+    """
 
     class Meta:
         model = Products
@@ -18,3 +21,14 @@ class ProductsForm(forms.ModelForm):
                 raise forms.ValidationError('Запрещенное имя')
 
             return cleaned_data
+
+
+class VersionForm(forms.ModelForm):
+    """
+    Форма класса версий продукта
+    """
+
+    class Meta:
+        model = Version
+        fields = '__all__'
+
