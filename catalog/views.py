@@ -7,6 +7,7 @@ from catalog.forms import ProductsForm, VersionForm
 from catalog.models import Categories, Products, Version
 
 
+
 class ProductsCreateView(CreateView):
     """
     класс контроллер приложения каталог
@@ -15,6 +16,15 @@ class ProductsCreateView(CreateView):
     model = Products
     form_class = ProductsForm
     success_url = reverse_lazy('catalog:list')
+
+    def get_context_data(self, **kwargs):
+        context_data = super().get_context_data(**kwargs)
+        VersionFormset = inlineformset_factory(Products, Version, form=VersionForm, extra=1)
+        if self.request.method == 'POST':
+            context_data['formset'] = VersionFormset(self.request.POST)
+        else:
+            context_data['formset'] = VersionFormset()
+        return context_data
 
 
 class ProductsListView(ListView):
@@ -56,7 +66,7 @@ class ProductsUpdateView(UpdateView):
 
     def form_valid(self, form):
         formset = self.get_context_data()['formset']
-        self.object = form.save
+        self.object = form.save()
         if formset.is_valid():
             formset.instance = self.object
             formset.save()
@@ -104,4 +114,3 @@ def contacts(request):
         'title': 'Обратная связь'
     }
     return render(request, 'catalog/contacts.html', context=context)
-

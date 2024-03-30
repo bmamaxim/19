@@ -3,7 +3,17 @@ from django import forms
 from catalog.models import Products, Version
 
 
-class ProductsForm(forms.ModelForm):
+class StyleFormMixin:
+    """
+    Класс примесь стилей форм
+    """
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for fild_name, field in self.fields.items():
+            field.widget.attrs['class'] = 'form-control'
+
+
+class ProductsForm(StyleFormMixin, forms.ModelForm):
     """
     Форма класса продукта
     """
@@ -11,6 +21,7 @@ class ProductsForm(forms.ModelForm):
     class Meta:
         model = Products
         exclude = ('created_at', 'updated_at',)
+
 
     def clean_product_name(self):
         cleaned_data = self.cleaned_data.get('product_name')
@@ -23,7 +34,7 @@ class ProductsForm(forms.ModelForm):
             return cleaned_data
 
 
-class VersionForm(forms.ModelForm):
+class VersionForm(StyleFormMixin, forms.ModelForm):
     """
     Форма класса версий продукта
     """
@@ -31,4 +42,3 @@ class VersionForm(forms.ModelForm):
     class Meta:
         model = Version
         fields = '__all__'
-

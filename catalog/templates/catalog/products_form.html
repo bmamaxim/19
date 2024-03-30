@@ -27,8 +27,8 @@
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="row text-start">
+
+
             <div class="col-lg-6 col-md-6 col-sm-12">
                 <div class="card mb-4 box-shadow">
                     <div class="card-header">
@@ -38,12 +38,15 @@
                         <div class="card-body">
                             <form method="post" enctype="multipart/form-data" class="form-floating">
                                 {{ formset.management_form }}
-
+                                {% for form in formset.forms %}
+                                {{ form.as_p }}
+                                {% endfor %}
                             </form>
                         </div>
                     </div>
                 </div>
             </div>
+
         </div>
     </div>
 </div>
