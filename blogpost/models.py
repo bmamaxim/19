@@ -15,6 +15,6 @@ class BlogPost(models.Model):
         return f"{self.title} {self.slug} {self.content}"
 
     class Meta:
-        verbose_name = 'пост'
-        verbose_name_plural = 'посты'
+        verbose_name = 'продавец'
+        verbose_name_plural = 'продавцы'
 
