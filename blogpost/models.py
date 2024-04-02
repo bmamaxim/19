@@ -17,4 +17,3 @@ class BlogPost(models.Model):
     class Meta:
         verbose_name = 'продавец'
         verbose_name_plural = 'продавцы'
-
