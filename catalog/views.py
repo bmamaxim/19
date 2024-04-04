@@ -44,6 +44,7 @@ class ProductsDetailView(DetailView):
     model = Products
     template_name = 'catalog/products_detail.html'
 
+
 class ProductsUpdateView(UpdateView):
     """
     класс контроллер приложения каталог
@@ -51,6 +52,7 @@ class ProductsUpdateView(UpdateView):
     """
     model = Products
     form_class = ProductsForm
+
 
     def get_success_url(self):
         return reverse('products:detail', args=[self.kwargs.get('pk')])

@@ -3,7 +3,7 @@
 {% block content %}
 <div class="container">
     <div class="row">
-        <div class="col-3">
+        <div class="col-4">
             <div class="card mb-4 box-shadow">
                 <div class="card-body">
                     <h1 class="card-title pricing-card-title">{{ object.product_name }}</h1>
@@ -13,6 +13,7 @@
                         <li>- {{ object.product_category.category_name }}</li>
                         <li>- {{ object.product_category.category_description }}</li>
                         <li>- {{ object.updated_at }}</li>
+
                     </ul>
                     <div class="btn-group">
                         <a href="{% url 'products:update' object.pk %}"
