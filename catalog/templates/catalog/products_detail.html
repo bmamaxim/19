@@ -9,11 +9,11 @@
                     <h1 class="card-title pricing-card-title">{{ object.product_name }}</h1>
                     <img class="card-img-top" src="{{ object.product_image | media_filter }}">
                     <ul class="list-unstyled mt-3 mb-4 text-start m-3">
-                        <li>- {{ object.product_price }}</li>
-                        <li>- {{ object.product_category.category_name }}</li>
-                        <li>- {{ object.product_category.category_description }}</li>
-                        <li>- {{ object.updated_at }}</li>
-
+                        <li>Цена - {{ object.product_price }}</li>
+                        <li>Категория - {{ object.product_category.category_name }}</li>
+                        <li>Описание - {{ object.product_category.category_description }}</li>
+                        <li>Релиз - {{ object.updated_at }}</li>
+                        <li>Версия - {{ version.version_name }}</li>
                     </ul>
                     <div class="btn-group">
                         <a href="{% url 'products:update' object.pk %}"

@@ -45,6 +45,12 @@ class ProductsDetailView(DetailView):
     template_name = 'catalog/products_detail.html'
 
 
+    def get_context_data(self, **kwargs):
+        context_data = super().get_context_data(**kwargs)
+        context_data['version'] = self.get_object().version_set.filter(version_sign=True).first()
+        return context_data
+
+
 class ProductsUpdateView(UpdateView):
     """
     класс контроллер приложения каталог
