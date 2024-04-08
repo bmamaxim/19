@@ -9,17 +9,16 @@
                 <div class="card mb-4 box-shadow">
                     <div class="card-header">
                         <h4 class="my-0 font-weight-normal">
-                            Вы
+                            ведите почту
                         </h4>
                     </div>
                     <div class="card-body">
                         <form method="post" enctype="multipart/form-data" class="form-floating">
                             {% csrf_token %}
-                            {{ form.as_p }}
+                            <input type="text" name="email">
                             <button type="submit" class="btn btn-lg btn-block btn-outline-primary">
                                 Отправить
                             </button>
-                            <a class="btn btn-lg btn-block btn-outline-primary" href="{% url 'users:recovery' %}">Сменить пароль</a>
                         </form>
                     </div>
                 </div>

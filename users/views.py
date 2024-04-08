@@ -53,3 +53,21 @@ class Verify(TemplateView):
             user.save()
             return redirect('users:login')
         return redirect('/')
+
+class RestoreView(TemplateView):
+    def get(self, request, *args, **kwargs):
+        return render(request, 'users/recovery_pass.html')
+
+    def post(self, request, *args, **kwargs):
+        mail = request.POST.get('email')
+        user = get_object_or_404(User, email=mail)
+        restore_pass = ''.join([str(random.randint(1, 9)) for _ in range(4)])
+        send_mail(
+            subject='пароль',
+            message=f'пароль для входа: {restore_pass}',
+            from_email=settings.EMAIL_HOST_USER,
+            recipient_list=[user.email]
+        )
+        user.set_password(restore_pass)
+        user.save()
+        return redirect('users:login')
