@@ -6,11 +6,15 @@ from catalog.models import NULLABLE
 
 class User(AbstractUser):
     avatar = models.ImageField(upload_to='image/', verbose_name='изображение', **NULLABLE)
-    phone = models.CharField(max_length=200, verbose_name='телефон', unique=True)
+    phone = models.CharField(max_length=200, verbose_name='телефон', unique=True, **NULLABLE)
     country = models.CharField(max_length=200, verbose_name='страна')
     username = None
 
-    USERNAME_FIELD = 'phone'
+    email = models.EmailField(unique=True, verbose_name='элктронная почта')
+
+    ver_code = models.CharField(max_length=4, verbose_name='код верификации', **NULLABLE)
+
+    USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
 
     class Meta:
