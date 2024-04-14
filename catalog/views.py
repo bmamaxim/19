@@ -1,3 +1,4 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.forms import inlineformset_factory
 from django.shortcuts import render
 from django.urls import reverse_lazy, reverse
@@ -6,6 +7,10 @@ from django.views.generic import ListView, DetailView, CreateView, UpdateView, D
 from catalog.forms import ProductsForm, VersionForm
 from catalog.models import Categories, Products, Version
 
+
+class SellerViewMixin:
+
+    pass
 
 
 class ProductsCreateView(CreateView):
@@ -17,6 +22,13 @@ class ProductsCreateView(CreateView):
     form_class = ProductsForm
     success_url = reverse_lazy('catalog:list')
 
+    def form_valid(self, form):
+        self.object = form.save()
+        self.object.seller = self.request.user
+        self.object.save()
+
+        return super().form_valid(form)
+
     def get_context_data(self, **kwargs):
         context_data = super().get_context_data(**kwargs)
         VersionFormset = inlineformset_factory(Products, Version, form=VersionForm, extra=1)
@@ -27,13 +39,15 @@ class ProductsCreateView(CreateView):
         return context_data
 
 
-class ProductsListView(ListView):
+class ProductsListView(LoginRequiredMixin, ListView):
     """
     Класс контроллер приложения каталог
     шаблон продукты
     """
     model = Products
     template_name = 'catalog/products_list.html'
+    login_url = 'users:login'
+    #redirect_field_name = 'users:login'
 
 
 class ProductsDetailView(DetailView):

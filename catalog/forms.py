@@ -20,7 +20,7 @@ class ProductsForm(StyleFormMixin, forms.ModelForm):
 
     class Meta:
         model = Products
-        exclude = ('created_at', 'updated_at',)
+        exclude = ('created_at', 'updated_at', 'seller')
 
 
     def clean_product_name(self):
