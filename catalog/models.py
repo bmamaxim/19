@@ -26,8 +26,13 @@ class Products(models.Model):
     created_at = models.DateField(auto_now_add=True, verbose_name='дата записи', **NULLABLE)
     updated_at = models.DateField(auto_now_add=True, verbose_name='последние изменения', **NULLABLE)
 
+    publication_sign = models.BooleanField(default=True, verbose_name='публикация')
+
     seller = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, verbose_name='продавец',
                                **NULLABLE)
+
+    number_of_views = models.IntegerField(default=0, verbose_name='количество просмотров')
+
 
     def __str__(self):
         return (
@@ -39,6 +44,21 @@ class Products(models.Model):
     class Meta:
         verbose_name = 'продукт'
         verbose_name_plural = 'продукты'
+
+        permissions = (
+            (
+                'cancel',
+                'отмена публикации'
+            ),
+            (
+                'change_description',
+                'изменить описание'
+            ),
+            (
+                'change_category',
+                'изменить категорию'
+            ),
+        )
 
 
 class Version(models.Model):

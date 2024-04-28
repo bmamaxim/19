@@ -7,13 +7,15 @@ class StyleFormMixin:
     """
     Класс примесь стилей форм
     """
+
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         for fild_name, field in self.fields.items():
             field.widget.attrs['class'] = 'form-control'
 
 
-class ProductsForm(StyleFormMixin, forms.ModelForm):
+class ProductsForm(StyleFormMixin,
+                   forms.ModelForm):
     """
     Форма класса продукта
     """
@@ -21,7 +23,6 @@ class ProductsForm(StyleFormMixin, forms.ModelForm):
     class Meta:
         model = Products
         exclude = ('created_at', 'updated_at', 'seller')
-
 
     def clean_product_name(self):
         cleaned_data = self.cleaned_data.get('product_name')
@@ -32,6 +33,13 @@ class ProductsForm(StyleFormMixin, forms.ModelForm):
                 raise forms.ValidationError('Запрещенное имя')
 
             return cleaned_data
+
+
+class ModeratorFormProducts(StyleFormMixin,
+                            forms.ModelForm):
+    class Meta:
+        model = Products
+        fields = ('product_description', 'product_category', 'publication_sign')
 
 
 class VersionForm(StyleFormMixin, forms.ModelForm):
