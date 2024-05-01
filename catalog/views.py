@@ -6,6 +6,7 @@ from django.views.generic import ListView, DetailView, CreateView, UpdateView, D
 
 from catalog.forms import ProductsForm, VersionForm, ModeratorFormProducts
 from catalog.models import Categories, Products, Version
+from catalog.services import get_category_from_cache
 
 
 class SellerViewMixin:
@@ -120,19 +121,16 @@ class ProductsDeleteView(DeleteView):
     success_url = reverse_lazy('catalog:list')
 
 
-def home(request):
+class CategoriesListView(ListView):
     """
-    Функция контроллер шаблона
+    Класс контроллер шаблона
     домашней страницы приложения каталог
-    :param request: data
-    :return: dict
     """
-    category = Categories.objects.all()
-    context = {
-        'object_list': category,
-        'title': 'Главная'
-    }
-    return render(request, 'catalog/home.html', context)
+    model = Categories
+    template_name = 'catalog/home.html'
+
+    def get_queryset(self):
+        return get_category_from_cache()
 
 
 def contacts(request):
