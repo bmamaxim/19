@@ -1,0 +1,41 @@
+{% extends 'catalog/base.html' %}
+{% load media %}
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-3">
+            <div class="card mb-4 box-shadow">
+                <div class="card-body">
+                    <h1 class="card-title pricing-card-title">{{ object.product_name }}</h1>
+                    <img class="card-img-top" src="{{ object.product_image | media_filter }}">
+                    <ul class="list-unstyled mt-3 mb-4 text-start m-3">
+                        <li>- {{ object.product_price }}</li>
+                        <li>- {{ object.product_category.category_name }}</li>
+                        <li>- {{ object.product_category.category_description }}</li>
+                        <li>- {{ object.updated_at }}</li>
+                    </ul>
+                    <div class="btn-group">
+                        {% if perms.catalog.change_products %}
+                        <a href="{% url 'products:update' object.pk %}"
+                           class="btn btn-lg btn-block btn-outline-primary">Править</a>
+                        {% endif %}
+                        {% if object.seller == user %}
+                        <a href="{% url 'products:update' object.pk %}"
+                           class="btn btn-lg btn-block btn-outline-primary">Править</a>
+                        {% endif %}
+                        {% if object.seller == user %}
+                        <a href="{% url 'products:delete' object.pk %}"
+                           class="btn btn-lg btn-block btn-outline-danger">Удалить</a>
+                        {% endif %}
+                    </div>
+                    <div class="card-footer">
+                        Добавлен: {{ object.created_at}}
+                        Продавец: {{ object.seller.email}}
+                        Просмотров {{ object.number_of_views }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
